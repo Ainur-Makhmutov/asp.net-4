@@ -1,0 +1,46 @@
+﻿
+@{ ViewBag.Title = "Calculate"; }
+
+@model Лабораторная_работа___4.Models.CalculatorModel
+
+
+@using (Html.BeginForm("Calculate", "Calculator", FormMethod.Post))
+{
+    <p>
+        @Html.LabelFor(m => m.First_Number)
+        @Html.TextBoxFor(x => x.First_Number, new { @class = "textBoxStyle" })
+        @Html.ValidationMessageFor(x => x.First_Number)
+    </p>
+    <p>
+        @Html.LabelFor(m => m.Second_Number)
+        @Html.TextBoxFor(m => m.Second_Number)
+        @Html.ValidationMessageFor(m => m.Second_Number)
+    </p>
+    <p>
+        @Html.LabelFor(m => m.Operation)
+        @Html.DropDownListFor(m => m.Operation, new SelectList(new[]
+        {
+            "+",
+            "-",
+            "*",
+            "/"
+        }))
+    </p>
+    <p>
+        <button type="submit" name="action" value="calculate">Calculate</button>
+        <button type="submit" name="action" value="clearr">Clear</button>
+    </p>
+}
+
+@if (Model != null)
+{
+    <p>
+        
+
+        @Html.ActionLink("Результат", "Result", new { first_n = @Model.First_Number, oper = @Model.Operation, second_n = @Model.Second_Number, Result = @Model.Result })
+    </p>
+
+    <p>
+        @ViewBag.Message
+    </p>
+}
